@@ -16,6 +16,19 @@
       p {
         font-family: "楷体";
       }
+
+      .canvas-container {
+        /* background-image: url(https://pica.zhimg.com/v2-da0c09d6cceeb96dc5b3f854006ac0f6_r.jpg); */
+        /* background-image: url(https://pic2.zhimg.com/v2-6c7d4037dd8518626abc7f816e3a9309_r.jpg); */
+        /* background-image: url(https://pic2.zhimg.com/v2-59f591b27e0e02920b1d8a215de22ee5_r.jpg); */
+        /* background-image: url(https://pic2.zhimg.com/v2-59f591b27e0e02920b1d8a215de22ee5_r.jpg); */
+
+        background-image: url(https://pic1.zhimg.com/v2-4ad8963ac6dd96963a3aed1377104ea8_r.jpg);
+
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-clip: inherit;
+      }
     </style>
     <title>跨年快乐</title>
     <meta
@@ -66,6 +79,7 @@
         align-items: center;
         color: #fff;
         font-size: 20px;
+        display: none;
       "
     >
       <br />
@@ -113,17 +127,23 @@
       <div class="stage-container remove">
         <div class="page_two hide">
           <div id="text" style="display: none">
-            <p>
-              倒计时<br /><br />还有<span id="time"></span><br /><span
+            <p class="lwb">
+              2022开始倒计时：<br /><br />还有<span id="time"></span><br /><span
                 id="text1"
               ></span>
-              <!-- <br />接龙哈！发给你最好的15个朋友 <br />超过20个就永远幸福
+              <br />
+              祝甘莹莹（莹姐😎hhh）2023天天开心，诸事顺遂，万事尽可期，永远18岁！
+              <br />
+              好，下面是莹姐的专属烟花时间，show time！🎉🎊🎆
+              <!-- <br />2023还有就要到啦，期待不，期待不，哈哈哈
+              <br />下面是莹姐的专属烟花时间，show time！🎉🎊🎆
+              <br />接龙哈！发给你最好的15个朋友 <br />超过20个就永远幸福
               <br />不许在你这里断了！ <br />明年到来之前必须发完，不许偷懒
               <br />想起谁，发给谁，包括我[awa]
-              <br /> -->
+              <br />
               <br />彩蛋:点击屏幕任意地方即可放烟花 <br /><br /><br /><span
                 id="copyright"
-              ></span>
+              ></span> -->
             </p>
           </div>
           <div
@@ -230,25 +250,35 @@
         }, 0);
       }
       document.body.addEventListener("touchstart", musicInBrowserHandler);
-      $("#yhBtn").click((e) => {
-        $("#yhBtn").hide();
-        setTimeout(() => {
-          start();
-          fireworks();
-        }, 1600); //
-        setTimeout(() => {
-          function audioAutoPlay() {
-            var audio = document.getElementById("audioDom");
-            audio.play();
-          }
-          audioAutoPlay();
-        }, 800); //
-        console.log(
-          updateConfig({
-            autoLaunch: true,
-          })
-        );
+
+      setTimeout(() => {
+        start();
+        fireworks();
+      }, 1600);
+
+      updateConfig({
+        autoLaunch: true,
       });
+
+      // $("#yhBtn").click((e) => {
+      //   $("#yhBtn").hide();
+      //   setTimeout(() => {
+      //     start();
+      //     fireworks();
+      //   }, 1600);
+      //   setTimeout(() => {
+      //     function audioAutoPlay() {
+      //       var audio = document.getElementById("audioDom");
+      //       audio.play();
+      //     }
+      //     audioAutoPlay();
+      //   }, 800); //
+      //   console.log(
+      //     updateConfig({
+      //       autoLaunch: true,
+      //     })
+      //   );
+      // });
 
       function fireworks() {
         $(".page_one").addClass("hide");
@@ -272,6 +302,37 @@
             content.innerHTML = "<p>" + str_ + "</p>";
           }
         }, 100);
+        setTimeout(() => {
+          let min = 10,
+            max = 300;
+          let duration = 100;
+          let duration1 = 200;
+          for (let i = 0; i < 100; i++) {
+            setTimeout(() => {
+              for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                  launchShellFromConfig({ x: min, y: 100 });
+                  if (min >= 300) {
+                    min = 10;
+                  }
+                  console.log(min);
+                  min += 30;
+                }, duration);
+                duration += 400;
+              }
+            }, duration1);
+            duration1 += 2000;
+          }
+        }, 30000);
+      }
+
+      function stack(event) {
+        return new Promise((resolve, reject) => {
+          // launchShellFromConfig({ x: count, y: 100 });
+          setTimeout(() => {
+            resolve();
+          }, 300);
+        });
       }
 
       $(function () {
@@ -352,11 +413,11 @@
         if (todayMonth == 1) {
           if (todayDate == 1) {
             document.getElementById("text1").innerHTML =
-              "现在是1月1日,祝你" + todayYear + "新年快乐！";
+              "现在已经2023年的1月1日啦," + "新年快乐！甘莹莹同学！🥳🎉🎆";
           }
         } else {
-          document.getElementById("text1").innerHTML =
-            "提前祝你" + newYear + "新年快乐哦~";
+          document.getElementById("text1").innerHTML = "";
+          // "提前祝甘莹莹(😎我莹姐)" + newYear + "年新年快乐啦！,hhh~";
         }
         document.getElementById("time").innerHTML =
           diffDays +
@@ -367,10 +428,10 @@
           "分钟" +
           diffSeconds +
           "秒" +
-          newYear;
+          "就要步入2023新的一年啦！哇卡哇卡！🤩";
         /*
-     if(todayMonth==12){document.getElementById("copyright").innerHTML ="Copyright © 2022-"+newYear+" Core Studio. All rights reserved."}
-     else{document.getElementById("copyright").innerHTML ="Copyright © 2022-"+todayYear+" Core Studio. All rights reserved."}*/
+      if(todayMonth==12){document.getElementById("copyright").innerHTML ="Copyright © 2022-"+newYear+" Core Studio. All rights reserved."}
+      else{document.getElementById("copyright").innerHTML ="Copyright © 2022-"+todayYear+" Core Studio. All rights reserved."}*/
       }
       time();
     </script>
